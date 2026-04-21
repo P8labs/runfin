@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float sideSpeed;
     public InputActionReference move;
     public float _sideMove;
+    public GameObject floorPrefab;
 
 
     private Animator Anim;
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
     private Vector3 MoveDirection = Vector3.zero;
     private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
     private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
+
+
 
 
     void Start()
@@ -31,13 +34,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        _sideMove = move.action.ReadValue<float>();
+        // _sideMove = move.action.ReadValue<float>();
     }
 
     void FixedUpdate()
     {
 
-        MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
+        // MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
         MOVE();
 
 

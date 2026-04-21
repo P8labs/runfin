@@ -14,14 +14,54 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "fa567561-5331-4245-91f8-472466549beb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swipe",
+                    "type": "Value",
+                    "id": "2d994484-6f31-411c-932e-a11dfa6942db",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
-                    "id": "aeb90649-73bb-4f76-8a74-b07d8ca69759",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "2ab99cad-9afc-4bbe-abdb-b04a2e9bfa04",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "913382a9-326c-4819-acdd-07d1e8983260",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Swipe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f5004dda-4ad5-409a-b98e-b26ca4fcde33",
+                    "path": "1DAxis",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
@@ -30,22 +70,55 @@
                 },
                 {
                     "name": "negative",
-                    "id": "dfe9b4cb-734c-42bb-991e-bc7e1cfebf28",
+                    "id": "7a62d18a-6362-4acf-b555-6790c6aa11e5",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "3969fbba-3e33-4061-aa46-1b5eecb8ccd2",
+                    "id": "eaffad28-2d2b-4ff1-ba52-8c011f52a119",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "e2f9a425-8255-4375-a414-4eb58e88b1bc",
+                    "path": "1DAxis",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b08467b0-9604-4fd8-8926-9641c8d73873",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7d18d6da-d4a8-4420-9c80-c61e896285a4",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -60,6 +133,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touch",
+            "bindingGroup": "Touch",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }

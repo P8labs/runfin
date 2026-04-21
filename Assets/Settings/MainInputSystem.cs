@@ -100,14 +100,54 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Touch"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa567561-5331-4245-91f8-472466549beb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swipe"",
+                    ""type"": ""Value"",
+                    ""id"": ""2d994484-6f31-411c-932e-a11dfa6942db"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""aeb90649-73bb-4f76-8a74-b07d8ca69759"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""2ab99cad-9afc-4bbe-abdb-b04a2e9bfa04"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""913382a9-326c-4819-acdd-07d1e8983260"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Swipe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f5004dda-4ad5-409a-b98e-b26ca4fcde33"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
@@ -116,22 +156,55 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""dfe9b4cb-734c-42bb-991e-bc7e1cfebf28"",
+                    ""id"": ""7a62d18a-6362-4acf-b555-6790c6aa11e5"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""3969fbba-3e33-4061-aa46-1b5eecb8ccd2"",
+                    ""id"": ""eaffad28-2d2b-4ff1-ba52-8c011f52a119"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard"",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e2f9a425-8255-4375-a414-4eb58e88b1bc"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b08467b0-9604-4fd8-8926-9641c8d73873"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7d18d6da-d4a8-4420-9c80-c61e896285a4"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -150,12 +223,25 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Touch"",
+            ""bindingGroup"": ""Touch"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Touch = m_Player.FindAction("Touch", throwIfNotFound: true);
+        m_Player_Swipe = m_Player.FindAction("Swipe", throwIfNotFound: true);
     }
 
     ~@MainInputSystem()
@@ -237,6 +323,8 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Touch;
+    private readonly InputAction m_Player_Swipe;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -252,6 +340,14 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Touch".
+        /// </summary>
+        public InputAction @Touch => m_Wrapper.m_Player_Touch;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Swipe".
+        /// </summary>
+        public InputAction @Swipe => m_Wrapper.m_Player_Swipe;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -281,6 +377,12 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Touch.started += instance.OnTouch;
+            @Touch.performed += instance.OnTouch;
+            @Touch.canceled += instance.OnTouch;
+            @Swipe.started += instance.OnSwipe;
+            @Swipe.performed += instance.OnSwipe;
+            @Swipe.canceled += instance.OnSwipe;
         }
 
         /// <summary>
@@ -295,6 +397,12 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Touch.started -= instance.OnTouch;
+            @Touch.performed -= instance.OnTouch;
+            @Touch.canceled -= instance.OnTouch;
+            @Swipe.started -= instance.OnSwipe;
+            @Swipe.performed -= instance.OnSwipe;
+            @Swipe.canceled -= instance.OnSwipe;
         }
 
         /// <summary>
@@ -341,6 +449,19 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
+    private int m_TouchSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme TouchScheme
+    {
+        get
+        {
+            if (m_TouchSchemeIndex == -1) m_TouchSchemeIndex = asset.FindControlSchemeIndex("Touch");
+            return asset.controlSchemes[m_TouchSchemeIndex];
+        }
+    }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -355,5 +476,19 @@ public partial class @MainInputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Touch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTouch(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Swipe" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwipe(InputAction.CallbackContext context);
     }
 }
