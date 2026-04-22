@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 415a704d2dbc40e47be9cff73390239d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Scripts/Misc/LogoBlurFader.cs
+  uploadId: 661117

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fca2eba754f300744bc274768494b124
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Scripts/Managers/PlayerController.cs
+  uploadId: 661117

@@ -1,93 +1,108 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
 
 
-    public float Speed;
-    public float sideSpeed;
-    public InputActionReference move;
-    public float _sideMove;
-    public GameObject floorPrefab;
+    private Rigidbody2D rb;
+    private Animator anim;
+    public MainInputSystem _controls;
+    public float minimumSwipeMag = 10f;
+    private Vector2 _swipeDirection;
+
+    public float FwdSpeed;
+    private int lane = 1;
+    public float laneDistance = 4f;
 
 
-    private Animator Anim;
-    private CharacterController Ctrl;
-
-    private Vector3 MoveDirection = Vector3.zero;
-    private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
-    private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
-
-
-
-
+    private Vector2 direction;
     void Start()
     {
-        Anim = GetComponent<Animator>();
-        Ctrl = GetComponent<CharacterController>();
+
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        _controls = new MainInputSystem();
+        _controls.Player.Enable();
+
+        _controls.Player.Touch.canceled += ProcessTouchComplete;
+        _controls.Player.Swipe.performed += ProcessSwipeDelta;
+        _controls.Player.Move.performed += ProcessMove;
+
+        anim.SetBool("Walking", true);
     }
-
-
 
     void Update()
     {
-        // _sideMove = move.action.ReadValue<float>();
+        direction.y = FwdSpeed;
+        Vector2 targetPos = transform.position.x * transform.forward + transform.position.y * transform.up;
+
+        if (lane == 0) { targetPos += Vector2.left * laneDistance; }
+        else if (lane == 2) { targetPos += Vector2.right * laneDistance; }
+        transform.position = targetPos;
+
+
+
     }
 
     void FixedUpdate()
     {
-
-        // MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
-        MOVE();
-
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, FwdSpeed * 1);
 
     }
 
-    private void MOVE()
-    {
-        KEY_DOWN();
-        if (_sideMove != 0)
-        {
-            MOVE_Velocity(new Vector3(sideSpeed * _sideMove, 0, 0), new Vector3(0, 15 * _sideMove, 0));
-        }
-        KEY_UP();
-    }
-
-    private void KEY_DOWN()
+    void ProcessSwipeDelta(InputAction.CallbackContext ctx)
     {
 
-        if (_sideMove != 0)
-        {
-            Anim.CrossFade(MoveState, 0.1f, 0, 0);
-        }
+        _swipeDirection = ctx.ReadValue<Vector2>();
+
     }
-    private void KEY_UP()
+    void ProcessMove(InputAction.CallbackContext ctx)
     {
 
+        var val = ctx.ReadValue<float>();
 
-        if (_sideMove == 0)
-        {
-            Anim.CrossFade(IdleState, 0.1f, 0, 0);
-        }
+        if (val > 0) { MoveRight(); }
+        if (val < 0) { MoveLeft(); }
+
     }
-
-
-
-
-    private void MOVE_Velocity(Vector3 velocity, Vector3 rot)
+    void ProcessTouchComplete(InputAction.CallbackContext ctx)
     {
-        MoveDirection = new Vector3(velocity.x, MoveDirection.y, velocity.z);
-        if (Ctrl.enabled)
-        {
-            Ctrl.Move(MoveDirection * Time.deltaTime);
-        }
-        MoveDirection.x = 0;
-        MoveDirection.z = 0;
-        this.transform.rotation = Quaternion.Euler(rot);
+
+        if (Mathf.Abs(_swipeDirection.magnitude) < minimumSwipeMag) return;
+
+        if (_swipeDirection.x > 0) { MoveRight(); }
+        if (_swipeDirection.x < 0) { MoveLeft(); }
+
+
+
+
     }
+
+
+    void MoveRight()
+    {
+        lane++;
+        if (lane == 3) { lane = 2; }
+    }
+    void MoveLeft()
+    {
+        lane--;
+        if (lane == -1) { lane = 0; }
+
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.collider.CompareTag("obstacle"))
+        {
+            GameManager.GAME_OVER = true;
+        }
+    }
+
+
 
 
 

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 987bb9dbd4717bd40a9f78b7ec5780d0
+TrueTypeFontImporter:
+  serializedVersion: 2
+  fontSize: 64
+  forceTextureCase: -1
+  characterSpacing: 1
+  characterPadding: 0
+  includeFontData: 1
+  use2xBehaviour: 0
+  fontNames:
+  - Slicker
+  - Arial
+  customCharacters: 
+  fontRenderingMode: 0
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Fonts/SLICKER.TTF
+  uploadId: 661117

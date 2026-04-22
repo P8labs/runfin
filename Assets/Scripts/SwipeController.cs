@@ -9,7 +9,6 @@ public class SwipeController : MonoBehaviour
     public float minimumSwipeMag = 10f;
     private Vector2 _swipeDirection;
     public GameObject player;
-    public float _sideMove;
     void Start()
     {
 
@@ -36,11 +35,11 @@ public class SwipeController : MonoBehaviour
 
         if (val > 0)
         {
-            player.transform.position += new Vector3(4, 0, 0);
+            player.transform.position += new Vector3(1, 0, 0);
         }
         if (val < 0)
         {
-            player.transform.position += new Vector3(-4, 0, 0);
+            player.transform.position += new Vector3(-1, 0, 0);
         }
 
     }
@@ -57,17 +56,24 @@ public class SwipeController : MonoBehaviour
         if (_swipeDirection.x > 0)
         {
             // right
-            player.transform.position += new Vector3(4, 0, 0);
+            player.transform.position += new Vector3(1, 0, 0);
         }
         if (_swipeDirection.x < 0)
         {
-            player.transform.position += new Vector3(-4, 0, 0);
+            player.transform.position += new Vector3(-1, 0, 0);
             // left
         }
 
 
 
 
+    }
+
+
+
+    void MoveRight()
+    {
+        player.transform.position += new Vector3(1, 0, 0);
     }
 
 

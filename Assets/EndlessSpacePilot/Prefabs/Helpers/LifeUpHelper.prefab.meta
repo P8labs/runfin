@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 1b1898dbfb2b9fd4cbd22c7878732b22
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Prefabs/Helpers/LifeUpHelper.prefab
+  uploadId: 661117

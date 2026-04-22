@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 84ddc7d1b154cdb479b0ca578412ba1b
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Scripts/Movers/GlobalObjectMover.cs
+  uploadId: 661117

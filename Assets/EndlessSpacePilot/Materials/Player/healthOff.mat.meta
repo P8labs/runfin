@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 89f1f8dcd34ca5b469a1b2fe39c5a8d0
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37725
+  packageName: Endless Space Pilot
+  packageVersion: 1.5.1
+  assetPath: Assets/EndlessSpacePilot/Materials/Player/healthOff.mat
+  uploadId: 661117
