@@ -22,10 +22,6 @@ Game is simple but need good timing and fast reaction because obstacles are comi
 * Random obstacle spawning
 * Basic collision system
 
-## GamePlay
-
-<video src="Assets/Recordings/Movie_003.mp4" controls width="600"></video>
-
 
 ## How to Run
 
